@@ -4,7 +4,7 @@ let map;
 const KAKAO_REST_API_KEY = "c937fb927f2ee984c523bbdde1540495";
 const KAKAO_MAP_URL = "https://apis-navi.kakaomobility.com/v1/directions";
 const BIKE_MAP_URL =
-  "http://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/bikeList/1/1000";
+  "https://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/bikeList/1/1000";
 const KAKAO_ADDRESS_URL =
   "https://dapi.kakao.com/v2/local/geo/coord2address.json";
 const PRECIPITATION_URL =
