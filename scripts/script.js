@@ -7,8 +7,9 @@ const BIKE_MAP_URL =
   "https://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/bikeList/1/1000";
 const KAKAO_ADDRESS_URL =
   "https://dapi.kakao.com/v2/local/geo/coord2address.json";
+const CORS_PROXY = "https://corsproxy.io/?"; // 프록시 주소
 const PRECIPITATION_URL =
-  "https://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/ListRainfallService/1/5/";
+  "http://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/ListRainfallService/1/5/";
 const BIKE_IMAGE_SRC = "./assets/marker.png";
 let startPoint = null;
 let endPoint = null;
@@ -83,11 +84,11 @@ const getBikeInfo = async () => {
   const { rentBikeStatus } = await response.json();
   return rentBikeStatus;
 };
-
 const getPrecipitation = async (address) => {
-  const response = await fetch(PRECIPITATION_URL + address);
-  const { ListRainfallService } = await response.json();
-  return ListRainfallService;
+  const fullUrl = CORS_PROXY + encodeURIComponent(PRECIPITATION_URL + address);
+  const response = await fetch(fullUrl);
+  const data = await response.json();
+  return data.ListRainfallService;
 };
 
 const getAddress = async (lat, lng) => {
