@@ -8,7 +8,7 @@ const BIKE_MAP_URL =
 const KAKAO_ADDRESS_URL =
   "https://dapi.kakao.com/v2/local/geo/coord2address.json";
 const PRECIPITATION_URL =
-  "http://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/ListRainfallService/1/5/";
+  "https://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/ListRainfallService/1/5/";
 const BIKE_IMAGE_SRC = "./assets/marker.png";
 
 let startPoint = null;
