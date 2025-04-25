@@ -7,8 +7,7 @@ const BIKE_MAP_URL =
   "http://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/bikeList/1/1000";
 const KAKAO_ADDRESS_URL =
   "https://dapi.kakao.com/v2/local/geo/coord2address.json";
-const PRECIPITATION_URL =
-  "https://openapi.seoul.go.kr:8088/484c634d63796f75373754726c6b6b/json/ListRainfallService/1/5/";
+const PRECIPITATION_URL = "http://localhost:3000/rainfall?region=";
 const BIKE_IMAGE_SRC = "./assets/marker.png";
 
 let startPoint = null;
@@ -27,6 +26,9 @@ const emissionFactors = {
   diesel: 2.68,
   electric: 0,
 };
+(async () => {
+  const response = await fetch(PRECIPITATION_URL + address);
+})();
 
 const fuelEfficiency = 15;
 const fuelType = "gasoline";
