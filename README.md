@@ -1,6 +1,6 @@
 > ⚠️ **주의:**  
-> GitHub Pages (`https://deadrabbit07.github.io/my-eco-book-serve/`) 에서는 동작하지 않습니다.  
-> 반드시 로컬 서버에서 `localhost:5502/index.html` 주소로 접속해야 작동합니다.
+> GitHub Pages (`https://deadrabbit07.github.io/my-eco-book-serve/`) 에서는 UI만 보이고 동작하지 않습니다.  
+> 반드시 로컬 서버에서 `localhost:5502/index.html` 주소로 접속한 뒤 백엔드 서버를 실행해야 작동합니다.
 > 
 > 이 프로젝트는 반드시 백엔드 서버(`server.js`)를 먼저 실행해야 정상적으로 동작합니다. 
 > 백엔드 서버가 실행되지 않으면 카카오 지도만 표시되고, 환경 정보(강수량, 거리, 탄소 배출량 등)는 정상적으로 표시되지 않습니다.
