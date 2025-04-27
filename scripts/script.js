@@ -26,14 +26,10 @@ const emissionFactors = {
   diesel: 2.68,
   electric: 0,
 };
-(async () => {
-  const response = await fetch(PRECIPITATION_URL + address);
-})();
 
 const fuelEfficiency = 15;
 const fuelType = "gasoline";
 
-// 탄소 계산 (정확하게 km 변환 후 계산)
 function calculateCarbonEmissions(distance, fuelEfficiency, fuelType) {
   const distanceInKm = distance / 1000;
   const emissionFactor = emissionFactors[fuelType];
@@ -114,21 +110,26 @@ const getDirections = async () => {
   updateInfo();
 };
 
-// 현재 위치 기반 지도 초기화
 navigator.geolocation.getCurrentPosition(async (position) => {
   latitude = position.coords.latitude;
   longitude = position.coords.longitude;
 
   const addressData = await getAddress(latitude, longitude);
   const region = addressData.documents[0].address;
+
   address.querySelector(
     "#address_value"
   ).innerText = `${region.region_1depth_name} ${region.region_2depth_name} ${region.region_3depth_name}`;
 
-  const rainData = await getPrecipitation(region.region_2depth_name);
-  rainfall.querySelector(
-    "#rainfall_value"
-  ).innerText = `${rainData.row[0].RAINFALL10}mm / 10분`;
+  try {
+    const rainData = await getPrecipitation(region.region_2depth_name);
+    rainfall.querySelector(
+      "#rainfall_value"
+    ).innerText = `${rainData.row[0].RAINFALL10}mm / 10분`;
+  } catch (error) {
+    console.error("⚠️ 강수량 데이터 로딩 실패:", error);
+    rainfall.querySelector("#rainfall_value").innerText = `데이터 없음`;
+  }
 
   const mapContainer = document.getElementById("map");
   const mapOptions = {
@@ -137,7 +138,6 @@ navigator.geolocation.getCurrentPosition(async (position) => {
   };
   map = new kakao.maps.Map(mapContainer, mapOptions);
 
-  // 따릉이 마커 표시
   const bikeInfo = await getBikeInfo();
   bikeInfo.row.forEach((bike) => {
     const position = new kakao.maps.LatLng(
@@ -162,7 +162,6 @@ navigator.geolocation.getCurrentPosition(async (position) => {
 
   let markers = [];
 
-  // 지도 클릭 시 마커 추가 및 경로 계산
   kakao.maps.event.addListener(map, "click", (mouseEvent) => {
     const latlng = mouseEvent.latLng;
 
@@ -190,7 +189,6 @@ navigator.geolocation.getCurrentPosition(async (position) => {
     }
   });
 
-  // 초기화 버튼
   document
     .querySelector(".info-resetBtn > button")
     .addEventListener("click", () => {
